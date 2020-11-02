@@ -19,8 +19,7 @@ class NoAccountText extends StatelessWidget {
           style: TextStyle(fontSize: getProportionateScreenWidth(16)),
         ),
         GestureDetector(
-          onTap: () => Navigator.popAndPushNamed(
-              context, ForgotPasswordScreen.routeName),
+          onTap: () {},
           child: Text(
             "Sign Up",
             style: TextStyle(

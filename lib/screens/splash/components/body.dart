@@ -16,7 +16,7 @@ class _BodyState extends State<Body> {
   List<Map<String, String>> splashData = [
     {
       "text": "Welcome to Twisun, the real sunroof",
-      "image": "assets/images/splash_1.jpg"
+      "image": "assets/images/splash.png"
     },
     {
       "text": "We help people to charge their Twizy \n anywhere using the sun",

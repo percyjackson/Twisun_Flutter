@@ -80,25 +80,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
                 TabBarView(
                   controller: _tabController,
-                  children: //[
-                      //   GeneralTab(),
-                      //   GeneralTab(),
-                      //   GeneralTab(),
-                      //   GeneralTab(),
-                      // ],
-                      [
-                    Container(
-                      color: Colors.amber,
-                    ),
-                    Container(
-                      color: Colors.blue,
-                    ),
-                    Container(
-                      color: Colors.red,
-                    ),
-                    Container(
-                      color: Colors.green,
-                    ),
+                  children: [
+                    GeneralTab(),
+                    GeneralTab(),
+                    GeneralTab(),
+                    GeneralTab(),
                   ],
                 ).expand(),
               ])).white.make(),

@@ -23,6 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  shared_preferences: ^0.5.12+4
+  http: ^0.12.2
+  google_fonts: ^1.1.1
+  flutter_spinkit: "^4.1.2"
+  charts_flutter: ^0.9.0
+  dotted_line: ^2.0.2
+  shape_of_view: ^1.0.2
+  velocity_x: ^1.0.0
 
 
   # The following adds the Cupertino Icons font to your application.

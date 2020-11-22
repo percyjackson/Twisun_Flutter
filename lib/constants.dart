@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const String kBaseUrl = 'https://twisun.azurewebsites.net';
+
 const kPrimaryColor = Color(0xFF171443);
 const kPrimaryLightColor = Color(0xFF232257);
 const kPrimaryGradientColor = LinearGradient(

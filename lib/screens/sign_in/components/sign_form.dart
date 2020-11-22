@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:twisun/components/loading.dart';
+import 'package:twisun/models/login_model.dart';
 import 'package:twisun/screens/forgot_password/forgot_password_screen.dart';
+import 'package:twisun/screens/home/home_screen.dart';
+import 'package:twisun/screens/sign_in/components/service.dart';
+import 'package:twisun/services/auth_service.dart';
 import '../../../components/default_button.dart';
 import '../../../components/form_error.dart';
 
@@ -16,7 +22,22 @@ class _SignFormState extends State<SignForm> {
   String email;
   String password;
   bool remember = false;
+  bool isLoading = false;
+
+  LoginRequestModel requestModel;
+
+  @override
+  void initState() {
+    super.initState();
+    requestModel = new LoginRequestModel();
+  }
+
+  //sharedPreferences.setString("token", data['token']);
+  //Navigator.popAndPushNamed(context, HomeScreen.routeName);
+  //Navigator.pushNamedAndRemoveUntil(            context, HomeScreen.routeName, (route) => false);
+
   final List<String> errors = [];
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -54,9 +75,37 @@ class _SignFormState extends State<SignForm> {
             SizedBox(height: getProportionateScreenHeight(20)),
             DefaultButton(
               text: "Continue",
-              press: () {
+              press: () async {
                 if (_formKey.currentState.validate()) {
                   _formKey.currentState.save();
+                  //TODO Login!
+                  setState(() {
+                    isLoading = true;
+                  });
+                  AuthService authService = new AuthService();
+                  requestModel.email = email;
+                  requestModel.password = password;
+                  /*
+                  authService.login(requestModel).then((value) {
+                    setState(() {
+                      isLoading = false;
+                    });
+                    if (value.token.isNotEmpty) {
+                      print(value.token);
+                    } else {
+                      final snackBar = SnackBar(
+                        content: Text(value.error),
+                      );
+                      print(value.error);
+                    }
+                  });
+                  */
+
+                  var response = await logingUser(email, password);
+                  if (response.containsKey('token')) {
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, HomeScreen.routeName, (route) => false);
+                  }
                 }
               },
             )
@@ -85,10 +134,12 @@ class _SignFormState extends State<SignForm> {
           setState(() {
             errors.add(kPassNullError);
           });
+          return "";
         } else if (value.length < 6 && !errors.contains(kShortPassError)) {
           setState(() {
             errors.add(kShortPassError);
           });
+          return "";
         }
         return null;
       },
@@ -123,11 +174,13 @@ class _SignFormState extends State<SignForm> {
           setState(() {
             errors.add(kEmailNullError);
           });
+          return "";
         } else if (!emailValidatorRegExp.hasMatch(value) &&
             !errors.contains(kInvalidEmailError)) {
           setState(() {
             errors.add(kInvalidEmailError);
           });
+          return "";
         }
         return null;
       },

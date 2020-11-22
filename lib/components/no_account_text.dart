@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:twisun/screens/forgot_password/forgot_password_screen.dart';
 
 import '../constants.dart';
 import '../size_config.dart';

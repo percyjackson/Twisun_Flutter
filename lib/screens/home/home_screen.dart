@@ -28,13 +28,22 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
           title: Icon(
             Icons.ac_unit,
             color: Colors.white,
+            size: 30,
           ),
           actions: <Widget>[
-            Center(child: Text("120")),
+            Center(
+                child: Text(
+              "120",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 28),
+            )),
             IconButton(
               icon: Icon(
                 Icons.monetization_on_outlined,
                 color: Colors.amber,
+                size: 30,
               ),
               onPressed: () {},
             )

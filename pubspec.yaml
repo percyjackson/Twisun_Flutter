@@ -31,13 +31,12 @@ dependencies:
   dotted_line: ^2.0.2
   shape_of_view: ^1.0.2
   velocity_x: ^1.0.0
-
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   flutter_svg: ^0.19.1 #helps us to use SVG
   provider: ^4.3.2+2 #for state management
+  #geolocator: ^6.1.8
+  location: ^3.1.0
+  firebase_remote_config: ^0.4.2
 
 dev_dependencies:
   flutter_test:

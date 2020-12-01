@@ -36,7 +36,9 @@ dependencies:
   provider: ^4.3.2+2 #for state management
   #geolocator: ^6.1.8
   location: ^3.1.0
+  firebase_core: "^0.5.2+1"
   firebase_remote_config: ^0.4.2
+  firebase_crashlytics: ^0.2.3+1
 
 dev_dependencies:
   flutter_test:

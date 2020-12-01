@@ -9,7 +9,9 @@ import 'package:twisun/theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  //await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  if (!FirebaseCrashlytics.instance.isCrashlyticsCollectionEnabled) {
+    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  }
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   runApp(MyApp());

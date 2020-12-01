@@ -8,10 +8,11 @@ import 'package:twisun/models/user_location.dart';
 import 'package:twisun/models/weather_model.dart';
 
 class WeatherService {
-  final http.Client client;
+  //final http.Client client;
   String units = 'metric';
   String apiKey;
-  WeatherService({this.client});
+  UserLocation location;
+  //WeatherService({this.client});
 
   void setUnits(String units) {
     this.units = units;
@@ -39,7 +40,7 @@ class WeatherService {
           'http://api.openweathermap.org/data/2.5/onecall?lat=6.25&lon=-75.56&appid=$apiKey&exclude=minutely,alerts&units=metric';
     }
 
-    final response = await client.get(url);
+    var response = await http.get(url);
 
     WeatherModel req = WeatherModel.fromJson(json.decode(response.body));
     return req;

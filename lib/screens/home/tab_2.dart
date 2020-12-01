@@ -6,18 +6,44 @@ import 'package:shape_of_view/shape_of_view.dart';
 import 'package:twisun/constants.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:twisun/models/user_location.dart';
+import 'package:twisun/models/weather_model.dart';
 import 'package:twisun/services/weather_service.dart';
 
 class ForecastTab extends StatelessWidget {
+  WeatherService weatherService = WeatherService();
+  WeatherModel weather = WeatherModel();
   @override
   Widget build(BuildContext context) {
-    var userLocation = Provider.of<UserLocation>(context);
+    UserLocation userLocation = Provider.of<UserLocation>(context);
+    getWeather(userLocation);
     return Scaffold(
       body: Center(
         child: Text(
             'Location: Lat: ${userLocation.latitude} & lon: ${userLocation.longitude}'),
       ),
     );
+  }
+
+  void getWeather(UserLocation location) async {
+    if (weatherService.apiKey == null) {
+      await weatherService.getApiKey();
+    }
+    if (location.latitude != null && location.longitude != null) {
+      if (weatherService.location == null) {
+        weatherService.location = location;
+        weather = await weatherService.getWeather(location);
+        print(
+            '${weather.toString()} lat: ${location.latitude} lon: ${location.longitude}');
+      } else {
+        if (location.latitude != weatherService.location.latitude &&
+            location.longitude != weatherService.location.longitude) {
+          weatherService.location = location;
+          weather = await weatherService.getWeather(location);
+          print(
+              '${weather.toString()} lat: ${location.latitude} lon: ${location.longitude}');
+        }
+      }
+    }
   }
 }
 

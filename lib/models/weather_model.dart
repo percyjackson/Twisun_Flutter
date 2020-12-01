@@ -68,9 +68,11 @@ class Current {
     this.weather,
     this.pop,
     this.rain,
-  });
+  }) : date = new DateTime.fromMillisecondsSinceEpoch(dt * 1000, isUtc: true)
+            .toLocal();
 
   int dt;
+  final DateTime date;
   int sunrise;
   int sunset;
   double temp;
@@ -113,6 +115,7 @@ class Current {
 
   Map<String, dynamic> toJson() => {
         "dt": dt,
+        "date": date,
         "sunrise": sunrise == null ? null : sunrise,
         "sunset": sunset == null ? null : sunset,
         "temp": temp,
@@ -232,9 +235,10 @@ class Daily {
     this.pop,
     this.rain,
     this.uvi,
-  });
+  }) : date = new DateTime.fromMillisecondsSinceEpoch(dt * 1000).toLocal();
 
   int dt;
+  final DateTime date;
   int sunrise;
   int sunset;
   Temp temp;
@@ -246,7 +250,7 @@ class Daily {
   int windDeg;
   List<Weather> weather;
   int clouds;
-  int pop;
+  double pop;
   double rain;
   double uvi;
 
@@ -268,13 +272,14 @@ class Daily {
         weather:
             List<Weather>.from(json["weather"].map((x) => Weather.fromJson(x))),
         clouds: json["clouds"],
-        pop: json["pop"],
-        rain: json["rain"].toDouble(),
-        uvi: json["uvi"].toDouble(),
+        pop: json["pop"] == null ? null : json["pop"].toDouble(),
+        rain: json["rain"] == null ? null : json["rain"].toDouble(),
+        uvi: json["uvi"] == null ? null : json["uvi"].toDouble(),
       );
 
   Map<String, dynamic> toJson() => {
         "dt": dt,
+        "date": date,
         "sunrise": sunrise,
         "sunset": sunset,
         "temp": temp.toJson(),

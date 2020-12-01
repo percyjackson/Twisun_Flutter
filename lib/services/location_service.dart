@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:location/location.dart';
 import 'package:twisun/models/user_location.dart';
+import 'package:twisun/models/weather_model.dart';
+import 'package:twisun/services/weather_service.dart';
 
 class LocationService {
   UserLocation _currentLocation;

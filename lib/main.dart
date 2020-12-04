@@ -7,6 +7,7 @@ import 'package:twisun/screens/splash/splash_screen.dart';
 import 'package:twisun/theme.dart';
 
 void main() async {
+  //TODO Mejorar este async según las recomendaciones, crear también pantalla de carga cuando hace login
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   if (!FirebaseCrashlytics.instance.isCrashlyticsCollectionEnabled) {

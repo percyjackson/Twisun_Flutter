@@ -12,14 +12,46 @@ import 'package:twisun/services/weather_service.dart';
 class ForecastTab extends StatelessWidget {
   WeatherService weatherService = WeatherService();
   WeatherModel weather = WeatherModel();
+
+  //Test
+  List<charts.Series> seriesList;
+
+  //test
   @override
   Widget build(BuildContext context) {
     UserLocation userLocation = Provider.of<UserLocation>(context);
     getWeather(userLocation);
-    return Scaffold(
-      body: Center(
-        child: Text(
-            'Location: Lat: ${userLocation.latitude} & lon: ${userLocation.longitude}'),
+    // return Scaffold(
+    //   body: Center(
+    //     child: Text(
+    //         'Location: Lat: ${userLocation.latitude} & lon: ${userLocation.longitude}'),
+    //   ),
+    // );
+
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Container(
+        width: 1000,
+        padding: EdgeInsets.all(8),
+        child: new charts.LineChart(
+          seriesList,
+          animate: true,
+          // behaviors: [
+          //   // Add the sliding viewport behavior to have the viewport center on the
+          //   // domain that is currently selected.
+          //   new charts.SlidingViewport(),
+          //   // A pan and zoom behavior helps demonstrate the sliding viewport
+          //   // behavior by allowing the data visible in the viewport to be adjusted
+          //   // dynamically.
+          //   new charts.PanAndZoomBehavior(),
+          // ],
+          defaultRenderer:
+              new charts.LineRendererConfig(includeArea: true, stacked: true),
+          // Set an initial viewport to demonstrate the sliding viewport behavior on
+          // initial chart load.
+          // domainAxis: new charts.OrdinalAxisSpec(
+          //     viewport: new charts.OrdinalViewport('2018', 4)),
+        ),
       ),
     );
   }
@@ -32,6 +64,7 @@ class ForecastTab extends StatelessWidget {
       if (weatherService.location == null) {
         weatherService.location = location;
         weather = await weatherService.getWeather(location);
+        seriesList = getData(weather);
         print(
             '${weather.toString()} lat: ${location.latitude} lon: ${location.longitude}');
       } else {
@@ -39,11 +72,42 @@ class ForecastTab extends StatelessWidget {
             location.longitude != weatherService.location.longitude) {
           weatherService.location = location;
           weather = await weatherService.getWeather(location);
+          seriesList = getData(weather);
           print(
               '${weather.toString()} lat: ${location.latitude} lon: ${location.longitude}');
         }
       }
     }
+  }
+
+  /// Create one series with sample hard coded data.
+  List<charts.Series<Current, DateTime>> getData(WeatherModel weather) {
+    final hourly = weather.hourly;
+
+    return [
+      new charts.Series<Current, DateTime>(
+        id: 'temp',
+        // colorFn specifies that the line will be blue.
+        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+        // areaColorFn specifies that the area skirt will be light blue.
+        areaColorFn: (_, __) =>
+            charts.MaterialPalette.blue.shadeDefault.lighter,
+        domainFn: (Current current, _) => current.date,
+        measureFn: (Current current, _) => current.temp,
+        data: hourly,
+      ),
+      new charts.Series<Current, DateTime>(
+        id: 'uvi',
+        // colorFn specifies that the line will be green.
+        colorFn: (_, __) => charts.MaterialPalette.green.shadeDefault,
+        // areaColorFn specifies that the area skirt will be light green.
+        areaColorFn: (_, __) =>
+            charts.MaterialPalette.green.shadeDefault.lighter,
+        domainFn: (Current current, _) => current.date,
+        measureFn: (Current current, _) => current.uvi,
+        data: hourly,
+      ),
+    ];
   }
 }
 

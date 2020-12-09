@@ -10,9 +10,10 @@ void main() async {
   //TODO Mejorar este async según las recomendaciones, crear también pantalla de carga cuando hace login
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  if (!FirebaseCrashlytics.instance.isCrashlyticsCollectionEnabled) {
-    await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
-  }
+  await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
+  // if (!FirebaseCrashlytics.instance.isCrashlyticsCollectionEnabled) {
+  //   await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(true);
+  // }
 
   FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   runApp(MyApp());
@@ -28,8 +29,8 @@ class MyApp extends StatelessWidget {
       theme: theme(),
       //home: SplashScreen(),
       // We use routeName so that we dont need to remember the name
-      initialRoute: SplashScreen.routeName,
-      //initialRoute: HomeScreen.routeName,
+      //initialRoute: SplashScreen.routeName,
+      initialRoute: HomeScreen.routeName,
       routes: routes,
     );
   }

@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:twisun/models/user_location.dart';
 import 'package:twisun/screens/home/tab_1.dart';
+import 'package:twisun/screens/home/tab_2.dart';
+import 'package:twisun/services/location_service.dart';
+import 'package:twisun/services/weather_service.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:twisun/constants.dart';
 
@@ -12,11 +17,18 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   TabController _tabController;
+  WeatherService weatherService = WeatherService();
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(vsync: this, length: 4);
+    getKey();
+  }
+
+  void getKey() async {
+    await weatherService.getApiKey();
+    print(weatherService.apiKey);
   }
 
   @override
@@ -91,7 +103,11 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   controller: _tabController,
                   children: [
                     GeneralTab(),
-                    GeneralTab(),
+                    StreamProvider<UserLocation>.value(
+                      initialData: UserLocation(),
+                      value: LocationService().locationStream,
+                      child: ForecastTab(),
+                    ),
                     GeneralTab(),
                     GeneralTab(),
                   ],

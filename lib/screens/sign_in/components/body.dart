@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:twisun/constants.dart';
 import '../../../components/no_account_text.dart';
 import '../../../components/social_card.dart';
 import 'package:twisun/size_config.dart';
@@ -19,9 +20,9 @@ class Body extends StatelessWidget {
               children: [
                 SizedBox(height: SizeConfig.screenHeight * 0.04),
                 Text(
-                  "Welcome Back",
+                  "Welcome",
                   style: TextStyle(
-                    color: Colors.black,
+                    color: kPrimaryColor,
                     fontSize: getProportionateScreenWidth(28),
                     fontWeight: FontWeight.bold,
                   ),

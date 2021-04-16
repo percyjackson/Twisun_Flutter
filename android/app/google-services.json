@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "294610612239",
+    "firebase_url": "https://twi-sun.firebaseio.com",
+    "project_id": "twi-sun",
+    "storage_bucket": "twi-sun.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:294610612239:android:5239c666eb85b2dfb9337a",
+        "android_client_info": {
+          "package_name": "com.example.twisun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "294610612239-8e55v8hmtm3pnugii7596kq14f4ebus1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFj9gmIZV-7n3Zn2ib8AfitXNHSoo87m4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "294610612239-8e55v8hmtm3pnugii7596kq14f4ebus1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

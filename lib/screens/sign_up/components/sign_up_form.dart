@@ -30,7 +30,7 @@ class _SignUpFormState extends State<SignUpForm> {
           FormErrors(errors: errors),
           SizedBox(height: getProportionateScreenHeight(30)),
           DefaultButton(
-            text: "Continue",
+            text: "Sign Up",
             press: () {
               if (_formKey.currentState.validate()) {
                 //TODO SignUp with firebase

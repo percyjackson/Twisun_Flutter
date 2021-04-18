@@ -23,21 +23,23 @@ class WeatherService {
     apiKey = pref.getString('weather_key');
     if (apiKey == null) {
       RemoteConfig remoteConfig = await RemoteConfig.instance;
-      await remoteConfig.fetch(expiration: Duration(hours: 1));
-      await remoteConfig.activateFetched();
+      //await remoteConfig.fetch(expiration: Duration(hours: 1));
+      await remoteConfig.fetch();
+      //await remoteConfig.activateFetched();
+      await remoteConfig.activate();
       apiKey = remoteConfig.getValue('weather_key').asString();
       await pref.setString('weather_key', apiKey);
     }
   }
 
   Future<WeatherModel> getWeather(UserLocation result) async {
-    String url;
+    Uri url;
     if (result != null) {
-      url =
-          'http://api.openweathermap.org/data/2.5/onecall?lat=${result.latitude}&lon=${result.longitude}&appid=$apiKey&exclude=minutely,alerts&units=$units';
+      url = Uri.parse(
+          'http://api.openweathermap.org/data/2.5/onecall?lat=${result.latitude}&lon=${result.longitude}&appid=$apiKey&exclude=minutely,alerts&units=$units');
     } else {
-      url =
-          'http://api.openweathermap.org/data/2.5/onecall?lat=6.25&lon=-75.56&appid=$apiKey&exclude=minutely,alerts&units=metric';
+      url = Uri.parse(
+          'http://api.openweathermap.org/data/2.5/onecall?lat=6.25&lon=-75.56&appid=$apiKey&exclude=minutely,alerts&units=metric');
     }
 
     var response = await http.get(url);

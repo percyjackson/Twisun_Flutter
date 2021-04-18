@@ -23,12 +23,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^0.5.12+4
-  http: ^0.12.2
-  google_fonts: ^1.1.1
-  flutter_spinkit: "^4.1.2"
+  shared_preferences: ^2.0.5
+  http: ^0.13.1
+  google_fonts: ^2.0.0
+  flutter_spinkit: ^5.0.0
   charts_flutter: ^0.10.0
-  dotted_line: ^2.0.2
+  dotted_line: ^3.0.0
   shape_of_view: ^1.0.2
   cupertino_icons: ^1.0.0
   velocity_x: ^2.6.1
@@ -36,10 +36,11 @@ dependencies:
   provider: ^5.0.0 #for state management
   #geolocator: ^6.1.8
   #location_web: ^3.0.0
-  location: ^3.1.0
-  firebase_core: "^0.5.2+1"
-  firebase_remote_config: ^0.4.2
-  firebase_crashlytics: ^0.2.3+1
+  location: ^4.1.1
+  firebase_core: ^1.0.3
+  firebase_remote_config: ^0.10.0-dev.0
+  firebase_crashlytics: ^2.0.0
+  firebase_auth: ^1.0.1
 
 
 dev_dependencies:

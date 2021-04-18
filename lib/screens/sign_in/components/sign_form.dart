@@ -19,6 +19,7 @@ class SignForm extends StatefulWidget {
 
 class _SignFormState extends State<SignForm> {
   final _formKey = GlobalKey<FormState>();
+  final AuthService _auth = AuthService();
   String email;
   String password;
   bool remember = false;
@@ -82,9 +83,18 @@ class _SignFormState extends State<SignForm> {
                   setState(() {
                     isLoading = true;
                   });
+                  dynamic result =
+                      await _auth.signInWithEmailAndPassword(email, password);
+                  if (result == null) {
+                    setState(() {
+                      errors.add('Could not sign in with those credentials');
+                    });
+                  }
+                  /*
                   AuthService authService = new AuthService();
                   requestModel.email = email;
                   requestModel.password = password;
+                  */
                   /*
                   authService.login(requestModel).then((value) {
                     setState(() {
@@ -100,12 +110,13 @@ class _SignFormState extends State<SignForm> {
                     }
                   });
                   */
-
+                  /*
                   var response = await logingUser(email, password);
                   if (response.containsKey('token')) {
                     Navigator.pushNamedAndRemoveUntil(
                         context, HomeScreen.routeName, (route) => false);
                   }
+                  */
                 }
               },
             )
